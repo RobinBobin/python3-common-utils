@@ -1,4 +1,5 @@
 from collections.abc import Iterable
+from copy import deepcopy
 from decimal import Decimal, ROUND_HALF_UP
 from re import split
 from sys import float_info
@@ -21,12 +22,19 @@ class StaticUtils:
       return StaticUtils.round((x, y))
    
    @staticmethod
+   def getOrSetIfAbsent(obj, key, default):
+      if key not in obj:
+         obj[key] = default
+      
+      return obj[key]
+   
+   @staticmethod
    def isIterable(obj, ignore = (str,)):
       return not isinstance(obj, ignore) and isinstance(obj, Iterable)
    
    @staticmethod
    def mergeJson(a, b, overwrite = False):
-      c = a.copy()
+      c = deepcopy(a)
       
       for key, value in b.items():
          splitKey = split("[\[\]]", key)

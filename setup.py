@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
    name="simple-common-utils",
-   version="0.0.2",
+   version="0.0.3",
    author="Ruben Shalimov",
    author_email="r_shalimov@inbox.ru",
    description="Common utils for python3 projects.",
