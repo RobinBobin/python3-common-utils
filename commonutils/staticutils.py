@@ -23,10 +23,19 @@ class StaticUtils:
    
    @staticmethod
    def getOrSetIfAbsent(obj, key, default):
-      if key not in obj:
+      result = default
+      
+      try:
+         result = obj[key]
+      
+      except KeyError:
          obj[key] = default
       
-      return obj[key]
+      except IndexError:
+         obj.extend([None] * (key - len(obj)))
+         obj.append(default)
+      
+      return result
    
    @staticmethod
    def isIterable(obj, ignore = (str,)):
