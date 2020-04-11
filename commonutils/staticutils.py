@@ -32,8 +32,7 @@ class StaticUtils:
          obj[key] = default
       
       except IndexError:
-         obj.extend([None] * (key - len(obj)))
-         obj.append(default)
+         StaticUtils.setSafely(obj, key, default)
       
       return result
    
@@ -72,3 +71,12 @@ class StaticUtils:
    @staticmethod
    def round(value):
       return [StaticUtils.round(val) for val in value] if StaticUtils.isIterable(value) else int(Decimal(value).to_integral_value(ROUND_HALF_UP))
+   
+   @staticmethod
+   def setSafely(obj, index, value):
+      try:
+         obj[index] = value
+      
+      except IndexError:
+         obj.extend([None] * (index - len(obj)))
+         obj.append(value)
