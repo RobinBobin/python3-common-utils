@@ -70,7 +70,18 @@ class StaticUtils:
    
    @staticmethod
    def round(value):
-      return [StaticUtils.round(val) for val in value] if StaticUtils.isIterable(value) else int(Decimal(value).to_integral_value(ROUND_HALF_UP))
+      result = None
+      
+      if StaticUtils.isIterable(value):
+         result = [StaticUtils.round(val) for val in value]
+      
+      else:
+         if value.__class__.__module__ == "numpy":
+            value = value.item()
+         
+         result = int(Decimal(value).to_integral_value(ROUND_HALF_UP))
+      
+      return result
    
    @staticmethod
    def setSafely(obj, index, value):
