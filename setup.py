@@ -16,5 +16,5 @@ setuptools.setup(
    name="simple-common-utils",
    packages=setuptools.find_packages(),
    url="https://github.com/RobinBobin/python3-common-utils",
-   version="0.1.0"
+   version="0.1.1"
 )

@@ -74,6 +74,9 @@ class StaticUtils:
       
       if StaticUtils.isIterable(value):
          result = [StaticUtils.round(val) for val in value]
+         
+         if isinstance(value, tuple):
+            result = tuple(result)
       
       else:
          if value.__class__.__module__ == "numpy":
