@@ -1,6 +1,7 @@
 from collections.abc import Iterable
 from copy import deepcopy
 from decimal import Decimal, ROUND_HALF_UP
+from math import floor, log10
 from re import split
 from sys import float_info
 
@@ -23,18 +24,11 @@ class StaticUtils:
    
    @staticmethod
    def getOrSetIfAbsent(obj, key, default):
-      result = default
-      
-      try:
-         result = obj[key]
-      
-      except KeyError:
-         obj[key] = default
-      
-      except IndexError:
-         StaticUtils.setSafely(obj, key, default)
-      
-      return result
+      return StaticUtils.setIfAbsentAndGet(obj, key, default)
+   
+   @staticmethod
+   def getPlaces(value):
+      return [StaticUtils.getPlaces(number) for number in value] if StaticUtils.isIterable(value) else 0 if not value else floor(log10(abs(value))) + 1
    
    @staticmethod
    def isIterable(obj, ignore = (str,)):
@@ -94,3 +88,18 @@ class StaticUtils:
       except IndexError:
          obj.extend([None] * (index - len(obj)))
          obj.append(value)
+   
+   @staticmethod
+   def setIfAbsentAndGet(obj, key, default):
+      result = default
+      
+      try:
+         result = obj[key]
+      
+      except KeyError:
+         obj[key] = default
+      
+      except IndexError:
+         StaticUtils.setSafely(obj, key, default)
+      
+      return result
