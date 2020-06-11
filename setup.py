@@ -1,9 +1,10 @@
-import setuptools
+from setuptools import find_packages, setup
+from commonutils import __version__
 
 with open("README.md", "r") as fh:
    long_description = fh.read()
 
-setuptools.setup(
+setup(
    author="Ruben Shalimov",
    author_email="r_shalimov@inbox.ru",
    classifiers=[
@@ -14,7 +15,7 @@ setuptools.setup(
    long_description=long_description,
    long_description_content_type="text/markdown",
    name="simple-common-utils",
-   packages=setuptools.find_packages(),
+   packages=find_packages(),
    url="https://github.com/RobinBobin/python3-common-utils",
-   version="0.2.0"
+   version=__version__
 )

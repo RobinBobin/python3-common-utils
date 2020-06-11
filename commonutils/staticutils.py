@@ -2,10 +2,13 @@ from collections.abc import Iterable
 from copy import deepcopy
 from decimal import Decimal, ROUND_HALF_UP
 from math import floor, log10
+from platform import system
 from re import split
 from sys import float_info
 
 class StaticUtils:
+   __SYSTEM = system()
+   
    @staticmethod
    def getIntersection(line1, line2):
       a1 = (line1[0][1] - line1[1][1]) / (line1[0][0] - line1[1][0])
@@ -31,8 +34,16 @@ class StaticUtils:
       return [StaticUtils.getPlaces(number) for number in value] if StaticUtils.isIterable(value) else 0 if not value else floor(log10(abs(value))) + 1
    
    @staticmethod
+   def isLinux():
+      return StaticUtils.__SYSTEM == "Linux"
+   
+   @staticmethod
    def isIterable(obj, ignore = (str,)):
       return not isinstance(obj, ignore) and isinstance(obj, Iterable)
+   
+   @staticmethod
+   def isWindows():
+      return StaticUtils.__SYSTEM == "Windows"
    
    @staticmethod
    def mergeJson(a, b, overwrite = False):
