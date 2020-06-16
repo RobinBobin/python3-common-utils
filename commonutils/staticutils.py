@@ -117,13 +117,13 @@ class StaticUtils:
       return result
    
    @staticmethod
-   def sortStringsAsIntegers(iterable):
+   def sortStringsAsIntegers(iterable, separator = "."):
       def makeIntTuple(s):
-         s = s.split(".")
+         s = s.split(separator)
          
          if not s[-1]:
             s[-1] = '0'
          
          return tuple(map(int, s))
       
-      return tuple(map(lambda t: ".".join(map(str, t)), sorted(map(makeIntTuple, iterable), key = cmp_to_key(lambda t1, t2: -1 if t1 < t2 else 1 if t1 > t2 else 0))))
+      return tuple(map(lambda t: separator.join(map(str, t)), sorted(map(makeIntTuple, iterable), key = cmp_to_key(lambda t1, t2: -1 if t1 < t2 else 1 if t1 > t2 else 0))))
