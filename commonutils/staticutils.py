@@ -1,6 +1,7 @@
 from collections.abc import Iterable
 from copy import deepcopy
 from decimal import Decimal, ROUND_HALF_UP
+from functools import cmp_to_key
 from math import floor, log10
 from platform import system
 from re import split
@@ -114,3 +115,15 @@ class StaticUtils:
          StaticUtils.setSafely(obj, key, default)
       
       return result
+   
+   @staticmethod
+   def sortStringsAsIntegers(iterable):
+      def makeIntTuple(s):
+         s = s.split(".")
+         
+         if not s[-1]:
+            s[-1] = '0'
+         
+         return tuple(map(int, s))
+      
+      return tuple(map(lambda t: ".".join(map(str, t)), sorted(map(makeIntTuple, iterable), key = cmp_to_key(lambda t1, t2: -1 if t1 < t2 else 1 if t1 > t2 else 0))))
