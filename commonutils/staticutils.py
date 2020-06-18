@@ -26,11 +26,15 @@ class StaticUtils:
                keyChain.pop()
             
             elif isinstance(v, list):
+               keyChain.append(k)
+               
                for index, element in enumerate(v):
                   if isinstance(element, dict):
                      keyChain.append(index)
                      find(element)
                      keyChain.pop()
+               
+               keyChain.pop()
       
       find(dictionary)
       
