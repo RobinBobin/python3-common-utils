@@ -11,6 +11,32 @@ class StaticUtils:
    __SYSTEM = system()
    
    @staticmethod
+   def findKeyInDictionary(dictionary, key):
+      result = []
+      keyChain = []
+      
+      def find(d):
+         for k, v in d.items():
+            if k == key:
+               result.append(tuple(keyChain.copy()))
+            
+            if isinstance(v, dict):
+               keyChain.append(k)
+               find(v)
+               keyChain.pop()
+            
+            elif isinstance(v, list):
+               for index, element in enumerate(v):
+                  if isinstance(element, dict):
+                     keyChain.append(index)
+                     find(element)
+                     keyChain.pop()
+      
+      find(dictionary)
+      
+      return tuple(result)
+   
+   @staticmethod
    def getIntersection(line1, line2):
       a1 = (line1[0][1] - line1[1][1]) / (line1[0][0] - line1[1][0])
       b1 = line1[0][1] - (a1 * line1[0][0])
@@ -33,6 +59,15 @@ class StaticUtils:
    @staticmethod
    def getPlaces(value):
       return [StaticUtils.getPlaces(number) for number in value] if StaticUtils.isIterable(value) else 0 if not value else floor(log10(abs(value))) + 1
+   
+   @staticmethod
+   def indexDictionary(dictionary, keys):
+      d = dictionary
+      
+      for key in keys:
+         d = d[key]
+      
+      return d
    
    @staticmethod
    def isLinux():
