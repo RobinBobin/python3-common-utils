@@ -103,7 +103,7 @@ class StaticUtils:
                if invalidType:
                   raise ValueError(f"'{key}' exists in both JSONs but is a '{invalidType}' in one of them")
                
-               c[key] = mergeJson(c[key], b[key])
+               c[key] = StaticUtils.mergeJson(c[key], b[key])
          
          elif l == 3 and not len(splitKey[2]):
             c[splitKey[0]][int(splitKey[1])] = value
