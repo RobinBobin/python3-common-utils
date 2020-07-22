@@ -1,3 +1,2 @@
 from .staticutils import StaticUtils
-
-__version__ = "0.5.2"
+from .version import __version__
