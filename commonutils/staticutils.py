@@ -11,6 +11,11 @@ class StaticUtils:
    __SYSTEM = system()
    
    @staticmethod
+   def assertInheritance(o, t, name = None):
+      if not isinstance(o, t):
+         raise ValueError("{} must be a subclass of {}".format(f"'{name}'" if name else type(o), t))
+   
+   @staticmethod
    def findKeyInDictionary(dictionary, key):
       result = []
       keyChain = []
