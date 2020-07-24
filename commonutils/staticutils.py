@@ -13,7 +13,16 @@ class StaticUtils:
    @staticmethod
    def assertInheritance(o, t, name = None):
       if not isinstance(o, t):
-         raise ValueError("{} must be a subclass of {}".format(f"'{name}'" if name else type(o), t))
+         message = [f" must be a subclass of {t}"]
+         
+         if name:
+            message.insert(0, f"'{name}'")
+            message.append(f" and not a {type(o)} instance")
+         
+         else:
+            message.insert(0, f"{type(o)}")
+         
+         raise ValueError("".join(message))
    
    @staticmethod
    def findKeyInDictionary(dictionary, key):
