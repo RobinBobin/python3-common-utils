@@ -128,6 +128,10 @@ class StaticUtils:
       return c
    
    @staticmethod
+   def notImplemented():
+      raise RuntimeError("Not implemented")
+   
+   @staticmethod
    def round(value):
       result = None
       
