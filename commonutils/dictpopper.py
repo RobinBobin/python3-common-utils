@@ -9,7 +9,8 @@ class DictPopper:
       
       return map(f, self.__data.items())
    
-   def add(self, key, default = None):
-      self.__data[key] = default
+   def add(self, key, default = None, spreadKey = False):
+      for k in (key, ) if not spreadKey else key:
+         self.__data[k] = default
       
       return self
