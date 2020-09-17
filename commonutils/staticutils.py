@@ -25,6 +25,11 @@ class StaticUtils:
          raise ValueError("".join(message))
    
    @staticmethod
+   def confirm(condition, message):
+      if not condition:
+         raise ValueError(message)
+   
+   @staticmethod
    def findKeyInDictionary(dictionary, key):
       result = []
       keyChain = []
